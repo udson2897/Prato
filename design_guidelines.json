@@ -1,0 +1,215 @@
+{
+  "app_name": "ZappyFood",
+  "personality": "1 iOS-Native Clean",
+  "personality_one_liner": "A vibrant, trustworthy, and food-forward platform that balances consumer appetite with operational clarity.",
+  "color": {
+    "surface": "#FFFFFF",
+    "onSurface": "#1A1817",
+    "surfaceSecondary": "#F8F8F6",
+    "onSurfaceSecondary": "#4A4A4A",
+    "surfaceTertiary": "#EFEFEA",
+    "onSurfaceTertiary": "#6B6B6B",
+    "surfaceInverse": "#1A1817",
+    "onSurfaceInverse": "#FFFFFF",
+    "brand": "#FF5A00",
+    "brandPrimary": "#FF5A00",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#FFECE3",
+    "onBrandSecondary": "#D84C00",
+    "brandTertiary": "#FFF5F0",
+    "onBrandTertiary": "#FF5A00",
+    "success": "#28A745",
+    "onSuccess": "#FFFFFF",
+    "warning": "#FFB800",
+    "onWarning": "#4A3500",
+    "error": "#DC3545",
+    "onError": "#FFFFFF",
+    "info": "#17A2B8",
+    "onInfo": "#FFFFFF",
+    "border": "#EBEBEB",
+    "borderStrong": "#D6D6D6",
+    "divider": "#F0F0F0",
+    "dark": {
+      "surface": "#121110",
+      "onSurface": "#F5F5F5",
+      "surfaceSecondary": "#1C1C1A",
+      "onSurfaceSecondary": "#BDBDBD",
+      "surfaceTertiary": "#2A2A28",
+      "onSurfaceTertiary": "#9E9E9E",
+      "surfaceInverse": "#F5F5F5",
+      "onSurfaceInverse": "#121110",
+      "brand": "#FF7322",
+      "brandPrimary": "#FF7322",
+      "onBrandPrimary": "#FFFFFF",
+      "brandSecondary": "#3D1B08",
+      "onBrandSecondary": "#FF9A5E",
+      "brandTertiary": "#291205",
+      "onBrandTertiary": "#FFB894",
+      "success": "#34C759",
+      "onSuccess": "#FFFFFF",
+      "warning": "#FFD60A",
+      "onWarning": "#3D3300",
+      "error": "#FF453A",
+      "onError": "#FFFFFF",
+      "info": "#64D2FF",
+      "onInfo": "#00324D",
+      "border": "#2C2C2A",
+      "borderStrong": "#3A3A38",
+      "divider": "#242422"
+    }
+  },
+  "typography": {
+    "displayFontFamily": "Plus Jakarta Sans",
+    "textFontFamily": "Plus Jakarta Sans",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Generous touch targets and breathing room for scrolling lists. Minimum 56pt tappable height. Ensure ample bottom padding for screens with sticky bottom CTA banners.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 6,
+    "md": 12,
+    "lg": 20,
+    "pill": 999
+  },
+  "shadow_tier": "1",
+  "navigation": "bottom_tabs",
+  "icon_set": "Phosphor",
+  "glassmorphism": {
+    "enabled": true,
+    "do's": [
+      "Use blur on bottom tab bar.",
+      "Use glass on sticky headers over scrolling restaurant menus.",
+      "Use glass on Floating Action Buttons (like Chat per order)."
+    ],
+    "dont's": [
+      "Never blur body content or list rows.",
+      "Do not blur form fields."
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "Customer Home",
+      "purpose": "Discover stores, access favorites, and view horizontal categories.",
+      "states": {
+        "loading": "Skeleton UI for restaurant cards with generic food shapes.",
+        "empty": "No restaurants found for current address. CTA to change address.",
+        "error": "Failed to load feed. Retry button."
+      },
+      "layout": "Sticky header (glass) with location selector. Search bar. Horizontal scroll for categories (Burgers, Pizza, etc.). Vertical list of restaurant cards. Each card must have a hero image, title, rating, and delivery time."
+    },
+    {
+      "name": "Store Detail (Menu)",
+      "purpose": "View store items, variations, and add to cart.",
+      "states": {
+        "loading": "Spinner centered on empty menu.",
+        "empty": "Store has no items available right now.",
+        "error": "Could not load menu. Retry button."
+      },
+      "layout": "Hero image cover taking top 25%. Glassmorphism back button. Scrolling list of products grouped by category. Sticky bottom banner when items are in the cart showing total and 'View Cart' CTA."
+    },
+    {
+      "name": "Checkout & Order Tracking",
+      "purpose": "Finalize payment and track real-time delivery status.",
+      "states": {
+        "loading": "Processing payment spinner.",
+        "empty": "Cart is empty illustration.",
+        "error": "Payment failed, retry option."
+      },
+      "layout": "Checkout: Address selector, Payment method tiles (Pix, Card, Money). Tracking: Order status timeline (AGUARDANDO_CONFIRMACAO, ACEITO, EM_PREPARO, SAIU_PARA_ENTREGA, FINALIZADO) using status colors. Illustration of delivery rider. FAB for chat."
+    },
+    {
+      "name": "Lojista Dashboard",
+      "purpose": "Store owner overview of analytics and active queue.",
+      "states": {
+        "loading": "Loading metrics.",
+        "empty": "No active orders right now.",
+        "error": "Failed to fetch dashboard data."
+      },
+      "layout": "Top metric cards (Revenue, Orders). Order queue split by status. Swipeable list items to quickly change order status (e.g., swipe right to mark EM_PREPARO). Bottom tabs specifically for Lojista."
+    },
+    {
+      "name": "Lojista Products CRUD",
+      "purpose": "Manage catalog, variations, and add-ons.",
+      "states": {
+        "loading": "Loading catalog.",
+        "empty": "No products added yet. Large primary CTA 'Add First Product'.",
+        "error": "Could not load products."
+      },
+      "layout": "List view of products with thumbnail, price, and active toggle. Floating Action Button to add new product. Bottom sheet for editing add-ons."
+    },
+    {
+      "name": "Profile & Settings",
+      "purpose": "Manage user details, toggle roles, view subscription or loyalty program.",
+      "states": {
+        "loading": "Fetching profile.",
+        "empty": "N/A",
+        "error": "Could not load profile."
+      },
+      "layout": "Avatar and user name. Distinct, highlighted toggle 'Switch to Lojista/Customer'. Section for ZappyFood Loyalty (points) or Lojista Subscription (R$99/month, 7-day trial). Standard list rows with chevrons."
+    }
+  ],
+  "images": {
+    "burger_hero": {
+      "url": "https://images.unsplash.com/photo-1667329829058-ac191ba4a905?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHwyfHxkZWxpY2lvdXMlMjBoYW1idXJnZXIlMjByZXN0YXVyYW50JTIwY292ZXJ8ZW58MHx8fHwxNzg2NTQ1Mjc1fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Delicious hamburger hero cover"
+    },
+    "pizza_hero": {
+      "url": "https://images.unsplash.com/photo-1576458088443-04a19bb13da6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwzfHxicmF6aWxpYW4lMjBwaXp6YSUyMHNsaWNlfGVufDB8fHx8MTc4MTkwMzM0M3ww&ixlib=rb-4.1.0&q=85",
+      "alt": "Brazilian pizza slice cover"
+    },
+    "acai_bowl": {
+      "url": "https://images.unsplash.com/photo-1654923064926-be7e64267a31?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwxfHxhY2FpJTIwYm93bHxlbnwwfHx8fDE3ODY1NDUyOTV8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Acaí bowl"
+    },
+    "delivery_rider": {
+      "url": "https://images.unsplash.com/photo-1707817812089-586ca2bfe711?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTZ8MHwxfHNlYXJjaHwxfHxkZWxpdmVyeSUyMHJpZGVyJTIwbW90b3JjeWNsZSUyMGFwcHxlbnwwfHx8fDE3ODY1NDUyODZ8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Delivery rider on motorcycle"
+    },
+    "abstract_orange": {
+      "url": "https://images.unsplash.com/photo-1530982011887-3cc11cc85693?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTZ8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMG9yYW5nZSUyMGNsZWFuJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3ODY1NDUyODZ8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Abstract clean orange background for Splash/Lojista Hero"
+    }
+  },
+  "haptics": {
+    "primary_button_press": "impactLight",
+    "add_to_cart": "impactMedium",
+    "tab_switch": "selection",
+    "swipe_order_status": "impactHeavy",
+    "role_toggle": "notificationSuccess",
+    "checkout_success": "notificationSuccess"
+  },
+  "instructions_to_main_agent": [
+    "Implement navigation using expo-router, ensuring a smooth role switcher that seamlessly changes the bottom tabs from 'Customer' (Home, Search, Orders, Profile) to 'Lojista' (Dashboard, Products, Queue, Settings).",
+    "Use Phosphor icons consistently. Ensure stroke weight consistency across the app. Use outlined for inactive tabs, filled for active tabs.",
+    "For the Store Detail menu screen, make the top cover image parralax with scroll, and ensure a gradient scrim overlays the image to protect the white glass back button and any overlaid text.",
+    "Ensure 'brandPrimary' (#FF5A00) is used primarily for call-to-actions, active states, and important highlights, avoiding overusing it as large background blocks outside of the Splash screen.",
+    "Render the Order Status Timeline carefully using a vertical progress tracker. Ensure you use the semantic status colors (warning for EM_PREPARO, success for FINALIZADO).",
+    "When displaying photos on Customer cards (e.g., Pizza, Burgers), always apply an expo-image with a subtle gray background skeleton so it looks premium while loading."
+  ]
+}

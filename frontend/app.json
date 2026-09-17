@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "Pratô",
+    "slug": "frontend",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "frontend",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.emergent.deliverysaasbuild.wbz4to",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Usamos sua localização para preencher o endereço de entrega",
+        "NSPhotoLibraryUsageDescription": "Selecione fotos para o logo, banner e produtos da loja"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.emergent.deliverysaasbuild.wbz4to",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Selecione fotos para o logo, banner e produtos da loja"
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash-image.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#000000"
+        }
+      ],
+      "expo-audio"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

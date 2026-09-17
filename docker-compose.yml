@@ -1,0 +1,44 @@
+# ============================================================================
+# ZappyFood - local run with a bundled PostgreSQL (no Supabase needed to test).
+#
+#   docker compose up --build
+#
+# The backend will be available on http://localhost:8000 (health at /api/health)
+#
+# To point at Supabase instead of the local db, set DATABASE_URL in a .env file
+# next to this compose file (or edit the environment below) and you can remove
+# the `db` service.
+# ============================================================================
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: zappyfood
+    ports:
+      - "5432:5432"
+    volumes:
+      - zappy_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@db:5432/zappyfood}
+      DB_SSL: ${DB_SSL:-false}
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+      ACCESS_MINUTES: "60"
+      REFRESH_DAYS: "30"
+    ports:
+      - "8000:8000"
+
+volumes:
+  zappy_pg:
